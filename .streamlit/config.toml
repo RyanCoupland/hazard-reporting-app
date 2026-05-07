@@ -1,1 +1,25 @@
+[client]
+# Hides Streamlit's default sidebar navigation.
+# Keeps the prototype simple and mobile-app-like.
+showSidebarNavigation = false
 
+[theme]
+# Light base is best for outdoor readability.
+base = "light"
+
+# High-visibility yellow for the main action/accent colour.
+# This supports a warning-sign style design for hazard reporting.
+primaryColor = "#FFD400"
+
+# White background gives maximum contrast with black text.
+backgroundColor = "#FFFFFF"
+
+# Very pale yellow for secondary panels/cards if needed.
+# Keeps safety theme while remaining readable.
+secondaryBackgroundColor = "#FFF7CC"
+
+# Pure black text for maximum contrast.
+textColor = "#000000"
+
+# Sans-serif font for clear screen readability.
+font = "sans serif"

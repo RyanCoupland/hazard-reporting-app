@@ -7,6 +7,7 @@ def clear_report_data():
         "location",
         "severity",
         "hazard_photo",
+        "hazard_photo_input",
         "final_details",
         "final_details_input",
         "report_timestamp",

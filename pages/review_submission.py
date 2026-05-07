@@ -27,9 +27,9 @@ with st.container(key="review_summary"):
     st.write(f"Location: {location}")
     st.write(f"Severity: {severity}")
     st.write(f"Report time: {st.session_state.report_timestamp}")
-    st.write(f"Photo: {'Photo provided' if photo else 'No photo provided'}")
+    st.write(f"Photo: {'Photo provided' if photo is not None else 'No photo provided'}")
 
-if photo:
+if photo is not None:
     st.image(photo, use_container_width=True)
 
 st.write("Provide additional information (optional)")
@@ -66,7 +66,7 @@ if st.button("Submit Report", use_container_width=True, type="primary"):
         "location": location,
         "severity": severity,
         "final_details": st.session_state.final_details,
-        "photo_attached": "Yes" if photo else "No",
+        "photo_attached": "Yes" if photo is not None else "No",
     }
 
     save_report(report)

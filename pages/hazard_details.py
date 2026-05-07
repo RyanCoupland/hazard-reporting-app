@@ -2,20 +2,21 @@ import streamlit as st
 from styles import apply_global_styles
 from workflow import clear_report_data
 
-
 apply_global_styles()
 
-
+# Initialize session state variables
 if "severity" not in st.session_state:
     st.session_state.severity = None
 
+if "hazard_photo" not in st.session_state:
+    st.session_state.hazard_photo = None
 
 selected_severity = st.session_state.get("severity")
 
 st.title("Hazard Details")
 st.write("Step 3 of 4")
 
-st.write("How serious is the hazard?")
+st.subheader("How serious is the hazard?")
 
 severity_options = ["Low", "Medium", "High"]
 
@@ -32,13 +33,19 @@ for severity in severity_options:
         st.session_state.severity = severity
         st.rerun()
 
-st.write("Provide photo (optional)")
+st.subheader("Provide photo (optional)")
 
-st.camera_input(
+# Camera input + save photo to session_state
+photo = st.camera_input(
     "Take photo (optional)",
     key="hazard_photo",
     label_visibility="collapsed",
 )
+
+# This is the key fix — save the photo when taken
+if photo is not None:
+    st.session_state.hazard_photo = photo
+    st.success("✅ Photo captured successfully!")
 
 if st.button("Continue to Review", use_container_width=True, type="primary"):
     if not st.session_state.get("severity"):

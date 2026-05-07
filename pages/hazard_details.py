@@ -34,11 +34,14 @@ for severity in severity_options:
 
 st.write("Provide photo (optional)")
 
-st.camera_input(
+photo_input = st.camera_input(
     "Take photo (optional)",
-    key="hazard_photo",
+    key="hazard_photo_input",
     label_visibility="collapsed",
 )
+
+if photo_input is not None:
+    st.session_state.hazard_photo = photo_input.getvalue()
 
 if st.button("Continue to Review", use_container_width=True, type="primary"):
     if not st.session_state.get("severity"):

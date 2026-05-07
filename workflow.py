@@ -11,8 +11,9 @@ def clear_report_data():
         "final_details",
         "final_details_input",
         "report_timestamp",
+        "submitted_report_id",
+        "selected_report_id",
         "editing_from_review",
-        "confirm_cancel",
     ]
 
     for key in report_keys:

@@ -25,8 +25,23 @@ def init_db():
         )
     """)
 
+    ensure_column_exists(cursor, "reports", "final_details", "TEXT")
+    ensure_column_exists(cursor, "reports", "photo_data", "BLOB")
+
     conn.commit()
     conn.close()
+
+
+def ensure_column_exists(cursor, table_name, column_name, column_type):
+    cursor.execute(f"PRAGMA table_info({table_name})")
+    columns = cursor.fetchall()
+
+    existing_columns = [column[1] for column in columns]
+
+    if column_name not in existing_columns:
+        cursor.execute(
+            f"ALTER TABLE {table_name} ADD COLUMN {column_name} {column_type}"
+        )
 
 
 def save_report(report):

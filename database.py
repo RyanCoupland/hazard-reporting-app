@@ -20,7 +20,8 @@ def init_db():
             location TEXT NOT NULL,
             severity TEXT NOT NULL,
             final_details TEXT,
-            photo_attached TEXT NOT NULL
+            photo_attached TEXT NOT NULL,
+            photo_data BLOB
         )
     """)
 
@@ -40,9 +41,10 @@ def save_report(report):
             location,
             severity,
             final_details,
-            photo_attached
+            photo_attached,
+            photo_data
         )
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     """, (
         report["report_id"],
         report["submitted_time"],
@@ -51,6 +53,7 @@ def save_report(report):
         report["severity"],
         report.get("final_details", ""),
         report.get("photo_attached", "No"),
+        report.get("photo_data"),
     ))
 
     conn.commit()
@@ -90,7 +93,8 @@ def get_report_by_id(report_id):
             location,
             severity,
             final_details,
-            photo_attached
+            photo_attached,
+            photo_data
         FROM reports
         WHERE report_id = ?
     """, (report_id,))
